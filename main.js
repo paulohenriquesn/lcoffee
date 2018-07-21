@@ -18,6 +18,7 @@ language = {
     }
 }
 
+
 lcoffee_execute = (func,value) =>
 {
     switch(func){
@@ -121,34 +122,35 @@ for (i = 0; i < codeReaded.length; i ++) {
         lcoffee_execute(func,value); 
 
     }
-
-    if(codeReaded[i].split(' ')[1] == '='){
+    
+    switch(codeReaded[i].split(' ')[1]){
+        case "=":
         func = "setvar";
         value = codeReaded[i].split(' ')[0] + "," + codeReaded[i].split(' ')[2];
         lcoffee_execute(func,value); 
-    }
-    if(codeReaded[i].split(' ')[1] == '+='){
+        break;
+        case "+=":
         func = "addvar";
         value = codeReaded[i].split(' ')[0] + "," + codeReaded[i].split(' ')[2];
         lcoffee_execute(func,value); 
-    }
-    if(codeReaded[i].split(' ')[1] == '-='){
+        break;
+        case "-=":
         func = "removevar";
         value = codeReaded[i].split(' ')[0] + "," + codeReaded[i].split(' ')[2];
         lcoffee_execute(func,value); 
-    }
-    if(codeReaded[i].split(' ')[1] == '*='){
+        break;
+        case "*=":
         func = "multiplyvar";
         value = codeReaded[i].split(' ')[0] + "," + codeReaded[i].split(' ')[2];
         lcoffee_execute(func,value); 
-    }
-    if(codeReaded[i].split(' ')[1] == '/='){
+        break;
+        case "/=":
         func = "dividevar";
         value = codeReaded[i].split(' ')[0] + "," + codeReaded[i].split(' ')[2];
         lcoffee_execute(func,value); 
+        break;
     }
-    
-        
+
     }
 }
 
