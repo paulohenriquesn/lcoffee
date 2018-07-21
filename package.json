@@ -1,0 +1,23 @@
+{
+  "name": "lcoffee",
+  "version": "1.0.0",
+  "description": "a basic programmer language",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulohenriquesn/lcoffee.git"
+  },
+  "author": "paulo henrique",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulohenriquesn/lcoffee/issues"
+  },
+  "homepage": "https://github.com/paulohenriquesn/lcoffee#readme",
+  "dependencies": {
+    "read-text-file": "^1.1.0"
+  }
+}
