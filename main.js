@@ -9,13 +9,21 @@ language = {
         'removevar',
         'multiplyvar',
         'dividevar',
-        'if'
+        'if',
+        'for'
     ],
     vars:{
         int:{
         int_name:[],
         int_values:[]
         }
+    },
+    for:{
+        infor:false,
+        _name:[],
+        _left:[],
+        pointer:0,
+        current:''
     }
 }
 
@@ -283,6 +291,24 @@ lcoffee_execute = (func,value) =>
     
             }
         break;
+        case "for":
+        //console.log(value.split(','));
+
+        pointer = 0;
+        if(language.vars.int.int_name.includes(value.split(',')[0].replace('&',""))){
+        for(x=0;x<language.vars.int.int_name.length;x++){
+            if(language.vars.int.int_name[x] == value.split(',')[0].replace('&',"")){
+                pointer = x;
+            }
+        }
+        language.for.current = value.split(',')[0].replace('&',"");
+        language.for.pointer = i;
+        language.vars.int.int_values[pointer] = parseInt(value.split(',')[1]);
+        language.for._name.push(value.split(',')[0].replace('&',""));
+        language.for._left.push(parseInt(value.split(',')[2]));
+        language.for.infor = true;
+    } 
+        break;
     }
     value = "";
     func = "";
@@ -333,8 +359,7 @@ try {
 catch(e){
 
 }
-    
-
+try {
     switch(codeReaded[i].split(' ')[1]){
         case "=":
         func = "setvar";
@@ -362,6 +387,7 @@ catch(e){
         lcoffee_execute(func,value); 
         break;
     }
+}catch(e){}
 
     try {
     if(codeReaded[i].split('(')[0] == "if "){
@@ -372,11 +398,75 @@ catch(e){
     }
     }catch(e){}
 
-    }
     try {
-        if(codeReaded[i] == "end"){ignore_code=false;}
+        if(codeReaded[i].split('(')[0] == "for "){
+            value = "";
+            func = "for";
+            value = value + codeReaded[i].split(' ')[1].replace('(',"") + "," + codeReaded[i].split(' ')[3].replace("):","");
+            lcoffee_execute(func,value);
+        }
+        }catch(e){}
+
+    }
+
+    try {
+        if(codeReaded[i] == "end"){
+            if(language.for.infor == true){
+              
+            
+
+
+                pointer = 0;
+                cpointer = 0;
+
+                for(x=0;x<language.vars.int.int_name.length;x++){
+                    
+                    if(language.vars.int.int_name[x] == language.for.current){
+                      //  console.log("[" + language.vars.int.int_name[x] +  "]" + "[" + language.for.current + "]");
+                        pointer = x;
+                    }
+                }
+
+                for(x=0;x<language.for._name.length;x++){
+                    if(language.for._name[x] == language.current){
+                        cpointer = x;
+                    }
+                }
+
+                if(language.vars.int.int_values[pointer] != language.for._left[cpointer]){
+                  /*  console.log(">>" + language.vars.int.int_values[pointer]);
+                    console.log("P>>" + pointer);*/
+                    language.vars.int.int_values[pointer] = language.vars.int.int_values[pointer] +1;
+                    i = language.for.pointer;
+                  
+                    
+                }else {
+                  /*  console.log("\n\n\n");
+                    for(ll=0;ll<language.vars.int.int_name.length;ll++){
+                        console.log("V>>" + language.vars.int.int_name[ll]);
+                    }
+                    console.log("P>>" + pointer);
+                    console.log("CP>>" + cpointer);
+                    console.log("CC>>" + language.for.current);
+                    console.log("\n\n\n");*/
+                    language.for._name.shift();
+                    language.for._left.shift();
+                    language.for.pointer = undefined;
+                    language.for.current = undefined;
+                    pointer = 0;
+                    cpointer = 0;
+                    language.for.infor = false;
+
+                    
+                }
+            }else{
+            ignore_code=false;
+            }
+        }
     }catch(e){}
+
 }
 
+console.log("\n=====================================");
 console.log(language);
 

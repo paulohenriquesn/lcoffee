@@ -1,18 +1,9 @@
-print "Hello World"
-
-x = 5
-c = 3
-
-print &x
-print &c
-
-x += 5
-print &x
-
-if (&x <= 15):
-print "test 1"
+x = 0
+c = 0
+for (&x = 0,10):
+print &x;
 end
-
-if (&x > &c):
-print "test 2"
+print "-----------"
+for (&c == 0,15):
+print &c
 end
