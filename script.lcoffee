@@ -3,7 +3,10 @@ x = 5
 print &x
 x += 5
 print &x
-
-if (&x >= 3):
-print "eae"
+if (&x <= 23):
+print "test 1"
+end
+c = 3
+if (&x > &c):
+print "test 2"
 end

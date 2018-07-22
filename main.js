@@ -86,49 +86,63 @@ lcoffee_execute = (func,value) =>
         case "if":
             if(language.vars.int.int_name.includes(value.split(',')[0].replace('&',""))){
                 pointer = 0;
+                compare = 0;
                 for(x=0;x<language.vars.int.int_name.length;x++){
                     if(language.vars.int.int_name[x] == value.split(',')[0].replace('&',"")){
                         pointer = x;
                     }
                 }
+
+                if(value.split(',')[2][0] == "&"){
+                    cpointer = 0;
+                    for(x=0;x<language.vars.int.int_name.length;x++){
+                        if(language.vars.int.int_name[x] == value.split(',')[2].replace('&',"")){
+                           cpointer = x;
+                        }
+                    }
+                    compare = language.vars.int.int_values[cpointer];
+                    
+                }else {
+                    compare = parseInt(value.split(',')[2]);
+                }
                 switch(value.split(',')[1]){
                     case "==":
-                    if(language.vars.int.int_values[pointer] == parseInt(value.split(',')[2])){
+                    if(language.vars.int.int_values[pointer] == compare){
                         ignore_code = false;
                     }else{
                         ignore_code = true;
                     }
                     break;
                     case "!=":
-                    if(language.vars.int.int_values[pointer] != parseInt(value.split(',')[2])){
+                    if(language.vars.int.int_values[pointer] != compare){
                         ignore_code = false;
                     }else{
                         ignore_code = true;
                     }
                     break;
                     case "<=":
-                    if(language.vars.int.int_values[pointer] <= parseInt(value.split(',')[2])){
+                    if(language.vars.int.int_values[pointer] <= compare){
                         ignore_code = false;
                     }else{
                         ignore_code = true;
                     }
                     break;
                     case ">=":
-                    if(language.vars.int.int_values[pointer] >= parseInt(value.split(',')[2])){
+                    if(language.vars.int.int_values[pointer] >= compare){
                         ignore_code = false;
                     }else{
                         ignore_code = true;
                     }
                     break;
                     case "!=":
-                    if(language.vars.int.int_values[pointer] != parseInt(value.split(',')[2])){
+                    if(language.vars.int.int_values[pointer] != compare){
                         ignore_code = false;
                     }else{
                         ignore_code = true;
                     }
                     break;
                 }
-                console.log(pointer);
+    
             }
         break;
     }
