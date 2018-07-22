@@ -1,12 +1,18 @@
 print "Hello World"
+
 x = 5
+c = 3
+
 print &x
+print &c
+
 x += 5
 print &x
-if (&x <= 23):
+
+if (&x <= 15):
 print "test 1"
 end
-c = 3
+
 if (&x > &c):
 print "test 2"
 end
