@@ -26,62 +26,199 @@ lcoffee_execute = (func,value) =>
             console.log(value);
         break;
         case "setvar":
+        cpointer = 0;
+        pointer = 0;
+        if(value.split(',')[1][0] == '&'){
+            
+            if(language.vars.int.int_name.includes(value.split(',')[1].replace("&",""))){
+                cpointer = 0;
+                for(x=0;x<language.vars.int.int_name.length;x++){
+                    if(language.vars.int.int_name[x] == value.split(',')[1].replace("&","")){
+                        cpointer = x;
+                    }
+                }
+            }
+
+            if(language.vars.int.int_name.includes(value.split(',')[0])){
+                pointer = 0;
+                for(x=0;x<language.vars.int.int_name.length;x++){
+                    if(language.vars.int.int_name[x] == value.split(',')[0]){
+                        pointer = x;
+                    }
+                }
+            }
+            language.vars.int.int_values[pointer] =  language.vars.int.int_values[cpointer];
+                
+        }else {
         if(language.vars.int.int_name.includes(value.split(',')[0])){
-            pointer = 0;
             for(x=0;x<language.vars.int.int_name.length;x++){
                 if(language.vars.int.int_name[x] == value.split(',')[0]){
                     pointer = x;
                 }
             }
+          
             language.vars.int.int_values[pointer] = parseInt(value.split(',')[1]);
         }else {
             language.vars.int.int_name.push(value.split(',')[0]);
             language.vars.int.int_values.push(parseInt(value.split(',')[1]));
         }
+    }
         break;
         case "addvar":
+        cpointer = 0;
+        pointer = 0;
+        if(value.split(',')[1][0] == '&'){
+            
+            if(language.vars.int.int_name.includes(value.split(',')[1].replace("&",""))){
+                cpointer = 0;
+                for(x=0;x<language.vars.int.int_name.length;x++){
+                    if(language.vars.int.int_name[x] == value.split(',')[1].replace("&","")){
+                        cpointer = x;
+                    }
+                }
+            }
+
+            if(language.vars.int.int_name.includes(value.split(',')[0])){
+                pointer = 0;
+                for(x=0;x<language.vars.int.int_name.length;x++){
+                    if(language.vars.int.int_name[x] == value.split(',')[0]){
+                        pointer = x;
+                    }
+                }
+            }
+            language.vars.int.int_values[pointer] = language.vars.int.int_values[pointer] +  language.vars.int.int_values[cpointer];
+                
+        }else {
         if(language.vars.int.int_name.includes(value.split(',')[0])){
-            pointer = 0;
             for(x=0;x<language.vars.int.int_name.length;x++){
                 if(language.vars.int.int_name[x] == value.split(',')[0]){
                     pointer = x;
                 }
             }
+          
             language.vars.int.int_values[pointer] = language.vars.int.int_values[pointer] + parseInt(value.split(',')[1]);
+        }else {
+            language.vars.int.int_name.push(value.split(',')[0]);
+            language.vars.int.int_values.push(parseInt(value.split(',')[1]));
         }
+    }
         break;
         case "removevar":
+        cpointer = 0;
+        pointer = 0;
+        if(value.split(',')[1][0] == '&'){
+            
+            if(language.vars.int.int_name.includes(value.split(',')[1].replace("&",""))){
+                cpointer = 0;
+                for(x=0;x<language.vars.int.int_name.length;x++){
+                    if(language.vars.int.int_name[x] == value.split(',')[1].replace("&","")){
+                        cpointer = x;
+                    }
+                }
+            }
+
+            if(language.vars.int.int_name.includes(value.split(',')[0])){
+                pointer = 0;
+                for(x=0;x<language.vars.int.int_name.length;x++){
+                    if(language.vars.int.int_name[x] == value.split(',')[0]){
+                        pointer = x;
+                    }
+                }
+            }
+            language.vars.int.int_values[pointer] = language.vars.int.int_values[pointer] -  language.vars.int.int_values[cpointer];
+                
+        }else {
         if(language.vars.int.int_name.includes(value.split(',')[0])){
-            pointer = 0;
             for(x=0;x<language.vars.int.int_name.length;x++){
                 if(language.vars.int.int_name[x] == value.split(',')[0]){
                     pointer = x;
                 }
             }
+          
             language.vars.int.int_values[pointer] = language.vars.int.int_values[pointer] - parseInt(value.split(',')[1]);
+        }else {
+            language.vars.int.int_name.push(value.split(',')[0]);
+            language.vars.int.int_values.push(parseInt(value.split(',')[1]));
         }
+    }
         break;
         case "multiplyvar":
+        cpointer = 0;
+        pointer = 0;
+        if(value.split(',')[1][0] == '&'){
+            
+            if(language.vars.int.int_name.includes(value.split(',')[1].replace("&",""))){
+                cpointer = 0;
+                for(x=0;x<language.vars.int.int_name.length;x++){
+                    if(language.vars.int.int_name[x] == value.split(',')[1].replace("&","")){
+                        cpointer = x;
+                    }
+                }
+            }
+
+            if(language.vars.int.int_name.includes(value.split(',')[0])){
+                pointer = 0;
+                for(x=0;x<language.vars.int.int_name.length;x++){
+                    if(language.vars.int.int_name[x] == value.split(',')[0]){
+                        pointer = x;
+                    }
+                }
+            }
+            language.vars.int.int_values[pointer] = language.vars.int.int_values[pointer] *  language.vars.int.int_values[cpointer];
+                
+        }else {
         if(language.vars.int.int_name.includes(value.split(',')[0])){
-            pointer = 0;
             for(x=0;x<language.vars.int.int_name.length;x++){
                 if(language.vars.int.int_name[x] == value.split(',')[0]){
                     pointer = x;
                 }
             }
+          
             language.vars.int.int_values[pointer] = language.vars.int.int_values[pointer] * parseInt(value.split(',')[1]);
+        }else {
+            language.vars.int.int_name.push(value.split(',')[0]);
+            language.vars.int.int_values.push(parseInt(value.split(',')[1]));
         }
+    }
         break;
         case "dividevar":
+        cpointer = 0;
+        pointer = 0;
+        if(value.split(',')[1][0] == '&'){
+            
+            if(language.vars.int.int_name.includes(value.split(',')[1].replace("&",""))){
+                cpointer = 0;
+                for(x=0;x<language.vars.int.int_name.length;x++){
+                    if(language.vars.int.int_name[x] == value.split(',')[1].replace("&","")){
+                        cpointer = x;
+                    }
+                }
+            }
+
+            if(language.vars.int.int_name.includes(value.split(',')[0])){
+                pointer = 0;
+                for(x=0;x<language.vars.int.int_name.length;x++){
+                    if(language.vars.int.int_name[x] == value.split(',')[0]){
+                        pointer = x;
+                    }
+                }
+            }
+            language.vars.int.int_values[pointer] = language.vars.int.int_values[pointer] /  language.vars.int.int_values[cpointer];
+                
+        }else {
         if(language.vars.int.int_name.includes(value.split(',')[0])){
-            pointer = 0;
             for(x=0;x<language.vars.int.int_name.length;x++){
                 if(language.vars.int.int_name[x] == value.split(',')[0]){
                     pointer = x;
                 }
             }
+          
             language.vars.int.int_values[pointer] = language.vars.int.int_values[pointer] / parseInt(value.split(',')[1]);
+        }else {
+            language.vars.int.int_name.push(value.split(',')[0]);
+            language.vars.int.int_values.push(parseInt(value.split(',')[1]));
         }
+    }
         break;
         case "if":
             if(language.vars.int.int_name.includes(value.split(',')[0].replace('&',""))){
