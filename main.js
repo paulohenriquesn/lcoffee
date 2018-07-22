@@ -8,7 +8,8 @@ language = {
         'setvar',
         'removevar',
         'multiplyvar',
-        'dividevar'
+        'dividevar',
+        'if'
     ],
     vars:{
         int:{
