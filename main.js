@@ -18,7 +18,7 @@ language = {
     }
 }
 
-
+ignore_code = false;
 lcoffee_execute = (func,value) =>
 {
     switch(func){
@@ -83,21 +83,70 @@ lcoffee_execute = (func,value) =>
             language.vars.int.int_values[pointer] = language.vars.int.int_values[pointer] / parseInt(value.split(',')[1]);
         }
         break;
+        case "if":
+            if(language.vars.int.int_name.includes(value.split(',')[0].replace('&',""))){
+                pointer = 0;
+                for(x=0;x<language.vars.int.int_name.length;x++){
+                    if(language.vars.int.int_name[x] == value.split(',')[0].replace('&',"")){
+                        pointer = x;
+                    }
+                }
+                switch(value.split(',')[1]){
+                    case "==":
+                    if(language.vars.int.int_values[pointer] == parseInt(value.split(',')[2])){
+                        ignore_code = false;
+                    }else{
+                        ignore_code = true;
+                    }
+                    break;
+                    case "!=":
+                    if(language.vars.int.int_values[pointer] != parseInt(value.split(',')[2])){
+                        ignore_code = false;
+                    }else{
+                        ignore_code = true;
+                    }
+                    break;
+                    case "<=":
+                    if(language.vars.int.int_values[pointer] <= parseInt(value.split(',')[2])){
+                        ignore_code = false;
+                    }else{
+                        ignore_code = true;
+                    }
+                    break;
+                    case ">=":
+                    if(language.vars.int.int_values[pointer] >= parseInt(value.split(',')[2])){
+                        ignore_code = false;
+                    }else{
+                        ignore_code = true;
+                    }
+                    break;
+                    case "!=":
+                    if(language.vars.int.int_values[pointer] != parseInt(value.split(',')[2])){
+                        ignore_code = false;
+                    }else{
+                        ignore_code = true;
+                    }
+                    break;
+                }
+                console.log(pointer);
+            }
+        break;
     }
+    value = "";
+    func = "";
 }
-
-ignore_code = false;
 
 for (i = 0; i < codeReaded.length; i ++) {
     if(codeReaded[i] === "" || codeReaded[i][0] == '/' && codeReaded[i][1] == '/'){
         ignore_code == 1;}
         else{ignore_code == 0;}
-       if(codeReaded[i].length == 0){ignore_code = true};
+       if(codeReaded[i].length == 0){try{i++;}catch(e){}};
         
 
     if(ignore_code == false){
 
     //
+    try {
     if(codeReaded[i].split(' ')[1][0] == '"'){  
         func = codeReaded[i].split(' ')[0];
 
@@ -107,7 +156,13 @@ for (i = 0; i < codeReaded.length; i ++) {
         }
 
     }
+}
+catch(e) {
 
+}
+
+
+try {
     if(codeReaded[i].split(' ')[1][0] == '&'){  
         func = codeReaded[i].split(' ')[0];
 
@@ -122,7 +177,12 @@ for (i = 0; i < codeReaded.length; i ++) {
         lcoffee_execute(func,value); 
 
     }
+}
+catch(e){
+
+}
     
+
     switch(codeReaded[i].split(' ')[1]){
         case "=":
         func = "setvar";
@@ -151,7 +211,19 @@ for (i = 0; i < codeReaded.length; i ++) {
         break;
     }
 
+    try {
+    if(codeReaded[i].split('(')[0] == "if "){
+        value = "";
+        func = "if";
+        value = value + codeReaded[i].split(' ')[1].replace('(',"") + "," + codeReaded[i].split(' ')[2] + "," + codeReaded[i].split(' ')[3].replace("):","");
+        lcoffee_execute(func,value);
     }
+    }catch(e){}
+
+    }
+    try {
+        if(codeReaded[i] == "end"){ignore_code=false;}
+    }catch(e){}
 }
 
 console.log(language);
