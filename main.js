@@ -425,22 +425,27 @@ for (i = 0; i < codeReaded.length; i++) {
  try{
  if(codeReaded[i].split(' '[0] == "#")){
    console.log(codeReaded[i].split(' ')[1]);
-   if(language.imports.includes(codeReaded[i].split(' ')[1]) && codeReaded[i].split(' ')[2] == ".window"){
-    x = parseInt(codeReaded[i].split(' ')[4])
-    z = parseInt(codeReaded[i].split(' ')[5])
-    indexApp = codeReaded[i].split(' ')[7].substr(1,codeReaded[i].split(' ')[7].length-2)
-    title = codeReaded[i].split(' ')[6].substr(1,codeReaded[i].split(' ')[6].length-2)
-    windowApp = null;
-    app.on('ready',()=> {
-        windowApp = new BrowserWindow({
-          width:x,
-          height:z,
-          title:title
-        });
-        
-        
-        windowApp.loadURL('file://' + __dirname + indexApp);
-    });
+   if(language.imports.includes(codeReaded[i].split(' ')[1])){
+     switch(codeReaded[i].split(' ')[1]){
+       case "electron":
+       x = parseInt(codeReaded[i].split(' ')[4])
+       z = parseInt(codeReaded[i].split(' ')[5])
+       indexApp = codeReaded[i].split(' ')[7].substr(1,codeReaded[i].split(' ')[7].length-2)
+       title = codeReaded[i].split(' ')[6].substr(1,codeReaded[i].split(' ')[6].length-2)
+       windowApp = null;
+       app.on('ready',()=> {
+           windowApp = new BrowserWindow({
+             width:x,
+             height:z,
+             title:title
+           });
+           
+           
+           windowApp.loadURL('file://' + __dirname + indexApp);
+       });
+       break;
+     }
+
   }
  }
  }
