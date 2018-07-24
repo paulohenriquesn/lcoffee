@@ -416,15 +416,16 @@ for (i = 0; i < codeReaded.length; i++) {
   } catch (e) {}
 
   try {
-    if(codeReaded[i] == "@ electron"){
-      language.imports.push("electron");
+    if(codeReaded[i].split(' ')[0] == "@"){
+      language.imports.push(codeReaded[i].split(' ')[1]);
     }
   }catch(e){}
  }
 
  try{
  if(codeReaded[i].split(' '[0] == "#")){
-  if(codeReaded[i].split(' '[1] == "electron") && codeReaded[i].split(' ')[2] == ".window"){
+   console.log(codeReaded[i].split(' ')[1]);
+   if(language.imports.includes(codeReaded[i].split(' ')[1]) && codeReaded[i].split(' ')[2] == ".window"){
     x = parseInt(codeReaded[i].split(' ')[4])
     z = parseInt(codeReaded[i].split(' ')[5])
     indexApp = codeReaded[i].split(' ')[7].substr(1,codeReaded[i].split(' ')[7].length-2)
