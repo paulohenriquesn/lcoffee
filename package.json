@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/paulohenriquesn/lcoffee#readme",
   "dependencies": {
+    "electron": "^2.0.5",
     "read-text-file": "^1.1.0"
+  },
+  "devDependencies": {
+    "electron": "^2.0.5"
   }
 }

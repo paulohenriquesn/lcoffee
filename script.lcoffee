@@ -1,9 +1,2 @@
-x = 0
-c = 0
-for (&x = 0,10):
-print &x;
-end
-print "-----------"
-for (&c == 0,15):
-print &c
-end
+@ electron
+# electron .window { 500 500 "WindowTest" }

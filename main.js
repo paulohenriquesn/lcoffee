@@ -1,3 +1,9 @@
+const {
+app,
+BrowserWindow,
+Menu
+} = require('electron')
+
 var readCodeText = require('read-text-file');
 
 var codeReaded = readCodeText.readSync('./script.lcoffee').split('\r\n');
@@ -24,7 +30,8 @@ language = {
   _left: [],
   pointer: 0,
   current: ''
- }
+ },
+ imports:[]
 }
 
 ignore_code = false;
@@ -408,7 +415,31 @@ for (i = 0; i < codeReaded.length; i++) {
    }
   } catch (e) {}
 
+  try {
+    if(codeReaded[i] == "@ electron"){
+      language.imports.push("electron");
+    }
+  }catch(e){}
  }
+
+ try{
+ if(codeReaded[i].split(' '[0] == "#")){
+  if(codeReaded[i].split(' '[1] == "electron") && codeReaded[i].split(' ')[2] == ".window"){
+    x = parseInt(codeReaded[i].split(' ')[4])
+    z = parseInt(codeReaded[i].split(' ')[5])
+    title = codeReaded[i].split(' ')[6].substr(1,codeReaded[i].split(' ')[6].length-2)
+    windowApp = null;
+    app.on('ready',()=> {
+        windowApp = new BrowserWindow({
+          width:x,
+          height:z,
+          title:title
+        });
+    });
+  }
+ }
+ }
+ catch(e){}
 
  try {
   if (codeReaded[i] == "end") {
