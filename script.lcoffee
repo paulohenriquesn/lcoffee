@@ -1,2 +1,2 @@
 @ electron
-# electron .window { 500 500 "WindowTest" }
+# electron .window { 500 500 "WindowTest" "/index.html" }
