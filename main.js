@@ -6,7 +6,7 @@ Menu
 
 var readCodeText = require('read-text-file');
 
-var codeReaded = readCodeText.readSync('./script.lcoffee').split('\r\n');
+var codeReaded = readCodeText.readSync('./script.lcoff').split('\r\n');
 
 language = {
  functions: [
